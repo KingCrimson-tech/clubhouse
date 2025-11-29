@@ -4,10 +4,10 @@ const pool = require('./db');
 
 module.exports = function(passport) {
     passport.use(
-        new LocalStrategy({ usernameField: 'email'}, async (ElementInternals, password, done) => {
+        new LocalStrategy({ usernameField: 'email'}, async (email, password, done) => {
             try {
                 const { rows } = await pool.query('select * from users where email = $1', [email])
-                const users = rows[0]
+                const user = rows[0]
 
                 if (!user){
                     return done(null, false, { message: 'No user with that email'})

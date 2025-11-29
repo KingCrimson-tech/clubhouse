@@ -1,0 +1,24 @@
+<!-- filepath: views/join-club.ejs -->
+<%- include('partials/header', { title: 'Join the Club' }) %>
+
+<h1>🔐 Join the Club</h1>
+
+<div style="background: #e7f3ff; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
+  <p><strong>Become a member to unlock:</strong></p>
+  <ul style="margin-top: 10px; margin-left: 20px;">
+    <li>See who wrote each message</li>
+    <li>View timestamps of all posts</li>
+    <li>Full access to the community</li>
+  </ul>
+</div>
+
+<form method="POST" action="/join-club">
+  <div class="form-group">
+    <label for="secret">Enter Secret Code</label>
+    <input type="password" id="secret" name="secret" placeholder="Hint: club123" required>
+  </div>
+
+  <button type="submit">Join Club</button>
+</form>
+
+<%- include('partials/footer') %>
