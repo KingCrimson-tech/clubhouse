@@ -66,9 +66,51 @@ class Message {
 
     //update msg(todo)
 
+    static async update(id, messageData) {
+    const { title, content } = messageData;
+    
+    const query = `
+      UPDATE messages 
+      SET title = $1, content = $2
+      WHERE id = $3
+      RETURNING *
+    `;
+    
+    const values = [title, content, id];
+    
+    try {
+      const { rows } = await pool.query(query, values);
+      return rows[0] || null;
+    } catch (error) {
+      throw error;
+    }
+  }
+
     //get msg count(todo)
 
+    static async countByUserId(userId) {
+    const query = 'SELECT COUNT(*) FROM messages WHERE user_id = $1';
+    
+    try {
+      const { rows } = await pool.query(query, [userId]);
+      return parseInt(rows[0].count);
+    } catch (error) {
+      throw error;
+    }
+  }
+
     //total msg count(todo)
+
+    static async count() {
+    const query = 'SELECT COUNT(*) FROM messages';
+    
+    try {
+      const { rows } = await pool.query(query);
+      return parseInt(rows[0].count);
+    } catch (error) {
+      throw error;
+    }
+  }
 
 }
 
